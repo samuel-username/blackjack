@@ -265,7 +265,7 @@ body {
 
 .message-screen .scores th,
 .message-screen .scores td {
-samuel adepoju
+  padding: 6px;
 }
 
 .message-screen button {
