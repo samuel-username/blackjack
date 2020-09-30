@@ -42,10 +42,12 @@ function createCard() {
   front = document.createElement('img')
   front.classList.add('front')
   front.src = `images/${shape}/${cardType}.jpg`
+  front.alt = 'front'
   
   back = document.createElement('img')
   back.classList.add('back')
   back.src = 'images/back3.jpg'
+  back.alt = 'back'
   
   card = document.createElement('div')
   card.classList.add('card')
