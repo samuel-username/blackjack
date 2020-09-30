@@ -1,0 +1,314 @@
+:root {
+  --bodyColor: white;
+  --tableColor: #1b5e27;
+  --secColor: #66bb6a;
+  --border: #f9f9f9;
+}
+
+* {
+  box-sizing: border-box;
+  /* z-index: 3; */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 100vh;
+  background: var(--bodyColor);
+  -webkit-user-select: none;
+  user-select: none;
+  display: flex;
+  juatify-content: center;
+  align-items: center;
+}
+
+#blackjack-game {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  max-height: 700px;
+  flex-direction: column;
+  margin: 0 auto;
+  position: relative;
+}
+
+#blackjack-utilities {
+  flex-basis: 60%;
+  display: grid;
+  align-items: center;
+}
+
+#blackjack-table {
+  width: 300px;
+  height: 300px;
+  max-width: 400px;
+  max-height: 400px;
+  background: var(--tableColor);
+  margin: 0 auto;
+  border-radius: 50px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+  transition: .5s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 700px;
+}
+
+#blackjack-table > div {
+  flex: 1;
+  margin: 0 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+}
+
+#blackjack-table .pending-space {
+  justify-content: flex-end;
+  padding-right: 15px;
+  position: relative;
+}
+
+#blackjack-table:hover {
+  
+}
+
+.board {
+  padding: 10px;
+  background: var(--secColor);
+  flex-basis: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#scores {
+  display: flex;
+  margin: 10px;
+  text-align: center;
+  background: var(--tableColor);
+  color: #fff;
+}
+
+#scores div {
+  padding: 10px;
+  border-left: 2px solid var(--border);
+}
+
+#scores div:last-child {
+  border-right: 2px solid var(--border);
+}
+
+#scores div span {
+  display: block;
+  font-size: 1.5em
+}
+
+.card {
+  width: 40px;
+  height: 60px;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, .18), -2px -2px 2px rgba(0, 0, 0, .18);
+  transition: .4s;
+  margin: 3px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.card:not(.rack):hover,
+.pending-card {
+  transform: rotateY(180deg);
+}
+
+.pending-card {
+  z-index: 3;
+  animation: move .5s;
+  animation-fill-mode: forwards;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: .3s;
+}
+
+.card img.front{
+  z-index: 2;
+}
+
+.card img.back {
+  z-index: 1;
+}
+
+.card:not(.rack):hover img.front {
+  opacity: 0;
+  transform: rotateY(180deg);
+}
+
+.card:not(.rack):hover img.back,
+.pending-card img.back {
+  z-index: 2;
+}
+
+.pending-card img.front {
+  opacity: 1;
+  transform: none;
+}
+
+.pending-card img.back {
+  animation: back-anim .5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes move {
+  100% {
+    transform: translateX(-150px) scale(1.4);
+    box-shadow: 0 4px 8px rgba(0,0,0,.16);
+  }
+}
+
+@keyframes back-anim {
+  100% {
+    z-index: 1;
+  }
+}
+
+.rack {
+  position: absolute;
+  right: 15px;
+  top: 17%;
+}
+
+#controls {
+  justify-content: center;
+  align-items: center;
+}
+
+#controls button {
+  outline: none;
+  border: 0;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 3px 4px rgba(0,0,0,0.4);
+  display: inline-block;
+  height: 50px;
+  width: 70px;
+  border-radius: 15px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  margin: 6px;
+  animation: upDown .9s infinite;
+}
+
+#controls button:active, 
+#controls button:disabled {
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  animation: none;
+}
+
+#controls button:disabled {
+  opacity: .7;
+}
+
+#controls button#hit {
+  background-color: #0097a7;
+}
+
+#controls button#stand {
+  background-color: #f57f17;
+}
+
+#controls button#deal {
+  background-color: #5d4031;
+}
+
+@keyframes upDown {
+  50% {
+    transform: scale(0.9)
+  }
+}
+
+.message-screen {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  width: 80%;
+  height: 60%;
+  background: white;
+  transform: translate(50%, -50%) scale(0);
+  z-index: 4;
+  opacity: 0;
+  border-radius: 10px;
+  box-shadow: 0 3px 7px rgba(0,0,0,.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2em;
+  transition: .4s;
+}
+
+.message-screen .message {
+  font-size: 3rem;
+  text-transform: capitalize;
+}
+
+.message-screen .scores th,
+.message-screen .scores td {
+samuel adepoju
+}
+
+.message-screen button {
+  padding: 10px;
+  margin: 10px;
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+  background: var(--secColor);
+  outline: none;
+  border-radius: 10px;
+  border: 0;
+  margin-bottom: 20px;
+}
+
+.message-screen.visible {
+  opacity: 1;
+  transform: translate(50%, -50%) scale(1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,.4);
+  z-index: -1;
+  opacity: 0;
+  transition: .4s;
+}
+
+.message-screen.visible + .overlay {
+  z-index: 3;
+  opacity: 1;
+}
+
+.message-screen.visible .message {
+  animation: pop 1s cubic-bezier(0.95, -0.05, 0.795, 0.035);
+}
+
+@keyframes pop {
+  50% {
+    transform: scale(1.2)
+  }
+}
