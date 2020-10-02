@@ -256,7 +256,7 @@ body {
   text-align: center;
   padding: 10px;
   font-size: 1.2em;
-  transition: .4s .2s;
+  transition: .4s;
 }
 
 .message-screen .message {
@@ -283,6 +283,7 @@ body {
 }
 
 .message-screen.visible {
+  transition-delay: .2s;
   opacity: 1;
   transform: translate(50%, -50%) scale(1);
 }
@@ -300,12 +301,13 @@ body {
 }
 
 .message-screen.visible + .overlay {
+  transition-delay: .2s;
   z-index: 3;
   opacity: 1;
 }
 
 .message-screen.visible .message {
-  animation: pop 1s cubic-bezier(0.95, -0.05, 0.795, 0.035);
+  animation: pop 1s .2s cubic-bezier(0.95, -0.05, 0.795, 0.035);
 }
 
 @keyframes pop {
