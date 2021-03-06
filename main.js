@@ -187,3 +187,6 @@ function hideMessageScreen() {
   enable(dealBtn)
 }
 
+document.getElementById('settings').addEventListener('click', () => {
+  alert('Created by Samuel Adepoju')
+});

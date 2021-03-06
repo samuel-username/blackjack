@@ -36,6 +36,15 @@ body {
   position: relative;
 }
 
+#settings {
+  width: 3rem;
+  height: 3rem;
+  background: inherit;
+  margin: 20px 0;
+  font-size: 2em;
+  border: 0;
+}
+
 #blackjack-utilities {
   flex-basis: 60%;
   display: grid;
