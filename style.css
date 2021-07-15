@@ -1,5 +1,5 @@
 :root {
-  --bodyColor: white;
+  --bodyColor: #333 /* white */;
   --tableColor: #1b5e27;
   --secColor: #66bb6a;
   --border: #f9f9f9;
