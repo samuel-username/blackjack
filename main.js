@@ -129,11 +129,13 @@ function determineWinner() {
     playerScore++
     displayMessageScreen('you win', 'var(--tableColor)')
     disable(hitBtn)
+    isOver = true
   } else if (playerCardValue > 21) {
     botScore++
     displayMessageScreen('bust', 'red')
     disable(hitBtn)
     disable(standBtn)
+    isOver = true
   } else if (botCardValue > playerCardValue) {
     botScore++
     displayMessageScreen('you lose', 'red')
@@ -141,6 +143,7 @@ function determineWinner() {
   } else if (playerCardValue === botCardValue && botCardValue >= 16) {
     draws++
     displayMessageScreen('draw')
+    isOver = true
   }
 }
 
@@ -184,9 +187,10 @@ function displayMessageScreen(message, color = '#000') {
 
 function hideMessageScreen() {
   messageScreen.classList.remove('visible')
-  enable(dealBtn)
+  isOver ? enable(dealBtn) : '' ;
 }
 
 document.getElementById('settings').addEventListener('click', () => {
   alert('Created by Samuel Adepoju')
+  displayMessageScreen('game ongoing', '#000')
 });
