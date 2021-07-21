@@ -18,9 +18,16 @@ body {
   background: var(--bodyColor);
   -webkit-user-select: none;
   user-select: none;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-rows: 3% 97%;
+  /* justify-content: center; */
   align-items: center;
+}
+
+.info {
+  font-size: .8em;
+  text-align: center;
+  background: #fff;
 }
 
 #blackjack-game {

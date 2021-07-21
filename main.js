@@ -191,6 +191,5 @@ function hideMessageScreen() {
 }
 
 document.getElementById('settings').addEventListener('click', () => {
-  alert('Created by Samuel Adepoju')
   displayMessageScreen('game ongoing', '#000')
 });
