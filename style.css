@@ -245,6 +245,7 @@ body {
 
 #controls button#deal {
   background-color: #5d4031;
+  display: none;
 }
 
 @keyframes upDown {
