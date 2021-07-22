@@ -186,7 +186,11 @@ function displayMessageScreen(message, color = '#000') {
 
 function hideMessageScreen() {
   messageScreen.classList.remove('visible')
-  isOver ? hideBtns() : ''
+  // isOver ? hideBtns() : ''
+  if (isOver) {
+    enable(dealBtn)
+    hideBtns()
+  }
 }
 
 function hideBtns() {
