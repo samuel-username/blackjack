@@ -119,7 +119,6 @@ async function stand() {
   }
 }
 
-
 function determineWinner() {
   if (
     (playerCardValue <= 21 &&
@@ -148,7 +147,6 @@ function determineWinner() {
 }
 
 function deal() {
-  disable(dealBtn)
   disable(standBtn)
   enable(hitBtn)
   playerCardValue = 0
@@ -158,6 +156,7 @@ function deal() {
   playerCardValueDisplay.textContent = 0
   botCardValueDisplay.textContent = 0
   isOver = false
+  showBtns()
 }
 
 function removeCards() {
@@ -187,8 +186,21 @@ function displayMessageScreen(message, color = '#000') {
 
 function hideMessageScreen() {
   messageScreen.classList.remove('visible')
-  isOver ? enable(dealBtn) : '' ;
+  isOver ? hideBtns() : ''
 }
+
+function hideBtns() {
+  dealBtn.style.display = 'block'
+  standBtn.style.display = 'none'
+  hitBtn.style.display = 'none'
+}
+
+function showBtns() {
+  dealBtn.style.display = 'none'
+  standBtn.style.display = 'block'
+  hitBtn.style.display = 'block'
+}
+showBtns()
 
 document.getElementById('settings').addEventListener('click', () => {
   displayMessageScreen('game ongoing', '#000')
