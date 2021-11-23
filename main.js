@@ -18,21 +18,16 @@ let playerCardValue = 0,
     isOver = false,
     allCards = [];
 
-const random = (min, max) => Math.floor(Math.random() * (max - min)) + min
-
-const delay = ms => new Promise(res => setTimeout(res, ms))
-
-const enable = button => button.disabled = false
-
-const disable = button => button.disabled = true
-
-const cardId = { 
-  A: [1, 11], 2: 2, 3: 3, 4: 4, 5: 5, 6: 6,
-  7: 7, 8: 8, 9: 9, 10: 10, J: 10, K: 10, Q: 10
-}
-
-const cardTypes = Object.keys(cardId)
-const shapes = ['club', 'diamond', 'heart', 'spade']
+const random = (min, max) => Math.floor(Math.random() * (max - min)) + min,
+      delay = ms => new Promise(res => setTimeout(res, ms)),
+      enable = button => button.disabled = false,
+      disable = button => button.disabled = true,
+      cardId = { 
+        A: [1, 11], 2: 2, 3: 3, 4: 4, 5: 5, 6: 6,
+        7: 7, 8: 8, 9: 9, 10: 10, J: 10, K: 10, Q: 10
+      },
+      cardTypes = Object.keys(cardId),
+      shapes = ['club', 'diamond', 'heart', 'spade'];
 
 function createCard() {
   let card, front, back, shape, cardType;
