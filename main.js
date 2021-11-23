@@ -36,12 +36,12 @@ function createCard() {
   cardType = cardTypes[random(0, cardTypes.length)]
   front = document.createElement('img')
   front.classList.add('front')
-  front.src = `images/${shape}/${cardType}.jpg`
+  front.src = `images/card front/${shape}/${cardType}.jpg`
   front.alt = 'front'
   
   back = document.createElement('img')
   back.classList.add('back')
-  back.src = 'images/back3.jpg'
+  back.src = 'images/card back/back3.jpg'
   back.alt = 'back'
   
   card = document.createElement('div')
