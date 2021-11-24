@@ -123,6 +123,19 @@ async function stand() {
   }
 }
 
+function deal() {
+  disable(standBtn)
+  enable(hitBtn)
+  playerCardValue = 0
+  botCardValue = 0
+  removeCards()
+  
+  playerCardValueDisplay.textContent = 0
+  botCardValueDisplay.textContent = 0
+  isOver = false
+  showBtns()
+}
+
 function stopAudioIfPlaying(sound) {
   if (!sound.paused) {
     sound.pause()
@@ -137,37 +150,20 @@ function determineWinner() {
     botCardValue > 15) || botCardValue > 21
     ) {
     playerScore++
-    displayMessageScreen('you win', 'var(--tableColor)')
     disable(hitBtn)
-    isOver = true
+    displayMessageScreen('you win', 'var(--tableColor)')
   } else if (playerCardValue > 21) {
     botScore++
-    displayMessageScreen('bust', 'red')
     disable(hitBtn)
     disable(standBtn)
-    isOver = true
+    displayMessageScreen('bust', 'red')
   } else if (botCardValue > playerCardValue) {
     botScore++
     displayMessageScreen('you lose', 'red')
-    isOver = true
   } else if (playerCardValue === botCardValue && botCardValue >= 16) {
     draws++
     displayMessageScreen('draw')
-    isOver = true
   }
-}
-
-function deal() {
-  disable(standBtn)
-  enable(hitBtn)
-  playerCardValue = 0
-  botCardValue = 0
-  removeCards()
-  
-  playerCardValueDisplay.textContent = 0
-  botCardValueDisplay.textContent = 0
-  isOver = false
-  showBtns()
 }
 
 function removeCards() {
@@ -176,28 +172,29 @@ function removeCards() {
 }
 
 function displayMessageScreen(message, color = '#000') {
-  messageScreen.innerHTML = `
+  isOver = true
+  const messageScreenContent = `
     <h1 class='message' style='color: ${color}'>${message}</h1>
     <table class='scores'>
       <tr>
         <th>Wins</th>
         <th>Losses</th>
         <th>Draws</th>
-        </tr>
-        <tr>
-          <td>${playerScore}</td>
-          <td>${botScore}</td>
-          <td>${draws}</td>
-        </tr>
+      </tr>
+      <tr>
+        <td>${playerScore}</td>
+        <td>${botScore}</td>
+        <td>${draws}</td>
+      </tr>
     </table>
     <button type='button' onclick='hideMessageScreen()'>Continue</button>
-  `;
+    `;
+  messageScreen.innerHTML = messageScreenContent
   messageScreen.classList.add('visible')
 }
 
 function hideMessageScreen() {
   messageScreen.classList.remove('visible')
-  // isOver ? hideBtns() : ''
   if (isOver) {
     enable(dealBtn)
     hideBtns()
