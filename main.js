@@ -115,7 +115,7 @@ async function stand() {
   
   while (botCardValue <= 15 && !isOver) {
     stopAudioIfPlaying(audio.cardSwipe)
-    await delay(random(0, 1000))
+    await delay(random(0, 2000))
     audio.cardSwipe.play()
     
     await addCard(botSpace)
