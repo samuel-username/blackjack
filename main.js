@@ -101,8 +101,7 @@ standBtn.addEventListener('click', stand)
 dealBtn.addEventListener('click', deal)
 
 async function hit() {
-  stopAudioIfPlaying(audio.cardSwipe)
-  audio.cardSwipe.play()
+  playAudio(audio.cardSwipe)
 
   await addCard(playerSpace)
   enable(standBtn)
@@ -114,9 +113,8 @@ async function stand() {
   disable(standBtn)
   
   while (botCardValue <= 15 && !isOver) {
-    stopAudioIfPlaying(audio.cardSwipe)
     await delay(random(0, 2000))
-    audio.cardSwipe.play()
+    playAudio(audio.cardSwipe)
     
     await addCard(botSpace)
     determineWinner()
@@ -136,11 +134,12 @@ function deal() {
   showBtns()
 }
 
-function stopAudioIfPlaying(sound) {
+function playAudio(sound) {
   if (!sound.paused) {
     sound.pause()
     sound.currentTime = 0
   }
+  sound.play()
 }
 
 function determineWinner() {
@@ -191,6 +190,7 @@ function displayMessageScreen(message, color, gameOver) {
     `;
   messageScreen.innerHTML = messageScreenContent
   messageScreen.classList.add('visible')
+  
 }
 
 function hideMessageScreen() {
