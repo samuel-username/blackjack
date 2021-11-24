@@ -8,7 +8,10 @@ const table = document.querySelector('#blackjack-table'),
       botSpace = document.querySelector('.bot-space'),
       playerCardValueDisplay = document.querySelector('#playerScore'),
       botCardValueDisplay = document.querySelector('#computerScore'),
-      messageScreen = document.querySelector('.message-screen');
+      messageScreen = document.querySelector('.message-screen'),
+      audio = {
+        cardSwipe: new Audio('audio/card_swipe.mp3'),
+      };
 
 let playerCardValue = 0, 
     botCardValue = 0,
@@ -98,6 +101,9 @@ standBtn.addEventListener('click', stand)
 dealBtn.addEventListener('click', deal)
 
 async function hit() {
+  stopAudioIfPlaying(audio.cardSwipe)
+  audio.cardSwipe.play()
+
   await addCard(playerSpace)
   enable(standBtn)
   determineWinner()
@@ -108,9 +114,19 @@ async function stand() {
   disable(standBtn)
   
   while (botCardValue <= 15 && !isOver) {
+    stopAudioIfPlaying(audio.cardSwipe)
     await delay(random(0, 1000))
+    audio.cardSwipe.play()
+    
     await addCard(botSpace)
     determineWinner()
+  }
+}
+
+function stopAudioIfPlaying(sound) {
+  if (!sound.paused) {
+    sound.pause()
+    sound.currentTime = 0
   }
 }
 
