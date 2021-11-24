@@ -151,18 +151,18 @@ function determineWinner() {
     ) {
     playerScore++
     disable(hitBtn)
-    displayMessageScreen('you win', 'var(--tableColor)')
+    displayMessageScreen('you win', 'var(--tableColor)', true)
   } else if (playerCardValue > 21) {
     botScore++
     disable(hitBtn)
     disable(standBtn)
-    displayMessageScreen('bust', 'red')
+    displayMessageScreen('bust', 'red', true)
   } else if (botCardValue > playerCardValue) {
     botScore++
-    displayMessageScreen('you lose', 'red')
+    displayMessageScreen('you lose', 'red', true)
   } else if (playerCardValue === botCardValue && botCardValue >= 16) {
     draws++
-    displayMessageScreen('draw')
+    displayMessageScreen('draw', 'black', true)
   }
 }
 
@@ -171,8 +171,8 @@ function removeCards() {
   allCards = []
 }
 
-function displayMessageScreen(message, color = '#000') {
-  isOver = true
+function displayMessageScreen(message, color, gameOver) {
+  isOver = gameOver
   const messageScreenContent = `
     <h1 class='message' style='color: ${color}'>${message}</h1>
     <table class='scores'>
@@ -215,5 +215,5 @@ function showBtns() {
 showBtns()
 
 document.getElementById('settings').addEventListener('click', () => {
-  displayMessageScreen('game ongoing', '#000')
+  displayMessageScreen('game ongoing', 'black', false)
 });
