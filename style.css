@@ -43,13 +43,21 @@ body {
   position: relative;
 }
 
-#settings {
+#ms-toggle {
   width: 3rem;
   height: 3rem;
   background: inherit;
   margin: 20px 0;
-  font-size: 2em;
+  font-size: .8em;
   border: 0;
+  background: white;
+  border-radius: 1em;
+  transition-duration: .2s;
+}
+
+#ms-toggle:hover {
+  background: var(--tableColor);
+  color: white;
 }
 
 #blackjack-utilities {

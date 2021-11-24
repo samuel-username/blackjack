@@ -241,6 +241,6 @@ function showBtns() {
 }
 showBtns()
 
-document.getElementById('settings').addEventListener('click', () => {
+document.getElementById('ms-toggle').addEventListener('click', () => {
   displayMessageScreen('game ongoing', 'black', false)
 });
