@@ -13,6 +13,9 @@ const table = document.querySelector('#blackjack-table'),
         cardSwipe: new Audio('audio/card_swipe.mp3'),
       };
 
+let storedGameData = JSON.parse(localStorage.getItem('game-data'))
+
+
 let playerCardValue = 0, 
     botCardValue = 0,
     playerScore = 0,
@@ -20,6 +23,20 @@ let playerCardValue = 0,
     draws = 0,
     isOver = false,
     allCards = [];
+    
+
+if (localStorage && !storedGameData) {
+  let gameData = {
+    playerScore,
+    botScore, 
+    draws
+  }
+  localStorage.setItem('game-data', JSON.stringify(gameData))
+} else if (storedGameData) {
+  playerScore = storedGameData.playerScore
+  botScore = storedGameData.botScore
+  draws = storedGameData.draws
+}
 
 const random = (min, max) => Math.floor(Math.random() * (max - min)) + min,
       delay = ms => new Promise(res => setTimeout(res, ms)),
@@ -60,6 +77,7 @@ function createCard() {
 
 async function addCard(parent) {
   let card = createCard()
+  
   // first put the card in the table center
   pendingSpace.appendChild(card)
   card.classList.add('pending-card')
@@ -71,6 +89,7 @@ async function addCard(parent) {
   card.remove()
   card.style.animationDuration = '0s'
   card.classList.remove('pending-card')
+  
   // then put it in the current player's side of the table
   if (parent.dataset.info) {
     parent.appendChild(card)
@@ -163,6 +182,15 @@ function determineWinner() {
     draws++
     displayMessageScreen('draw', 'black', true)
   }
+  
+  if (storedGameData) {
+    let gameData = {
+      playerScore,
+      botScore, 
+      draws
+    }
+    localStorage.setItem('game-data', JSON.stringify(gameData))
+  }
 }
 
 function removeCards() {
@@ -190,7 +218,6 @@ function displayMessageScreen(message, color, gameOver) {
     `;
   messageScreen.innerHTML = messageScreenContent
   messageScreen.classList.add('visible')
-  
 }
 
 function hideMessageScreen() {
