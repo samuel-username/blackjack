@@ -67,7 +67,7 @@ async function addCard(parent) {
     disable(hitBtn)
     disable(standBtn)
   }
-  await delay(600)
+  await delay(500)
   card.remove()
   card.style.animationDuration = '0s'
   card.classList.remove('pending-card')
